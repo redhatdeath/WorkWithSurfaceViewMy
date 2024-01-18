@@ -15,9 +15,8 @@ public class TimerCounterFramesIncrements {
         task = new TimerTaskCounterIncrements();
     }
 
-
     public void startWork() {
-        int PERIOD = 16;// ms, for 60 tic/sec
+        int PERIOD = 8;// ms, for 120 tic/sec
         int DELAYED_START = 0;// ms
         running = true;
         timer.scheduleAtFixedRate(task, DELAYED_START, PERIOD);
@@ -37,6 +36,6 @@ public class TimerCounterFramesIncrements {
     }
 
     private void setCurrentFrameCounter() {
-        Sprite.updateNextFrame();
+        Sprite.nextFrame();
     }
 }

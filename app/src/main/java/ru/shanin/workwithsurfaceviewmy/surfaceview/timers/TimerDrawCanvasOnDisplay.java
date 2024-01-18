@@ -15,24 +15,20 @@ import java.util.TimerTask;
 import ru.shanin.workwithsurfaceviewmy.surfaceview.sprite.Field;
 
 public class TimerDrawCanvasOnDisplay {
-
-    private final String LOG_TAG = TimerDrawCanvasOnDisplay.class.getSimpleName();
     private final Timer timer;
     private final TimerTaskDrawCanvas task;
     private boolean running;
 
 
     public TimerDrawCanvasOnDisplay(Context context, SurfaceHolder surfaceHolder) {
-        showLog("constructor");
         timer = new Timer();
         task = new TimerTaskDrawCanvas(surfaceHolder, context);
-
     }
 
 
     public void startWork() {
         // ms, for 30 tic/sec
-        int PERIOD = 32;//16.32.64
+        int PERIOD = 16;//16.32.64
         // ms
         int DELAYED_START = 0;
         running = true;
@@ -45,19 +41,12 @@ public class TimerDrawCanvasOnDisplay {
         return running;
     }
 
-    private void showLog(String message) {
-        Log.d(LOG_TAG, LOG_TAG + ": " + message);
-    }
-
     public void updateTouchCoordinate(int newX, int newY) {
         task.updateTouchCoordinate(newX, newY);
     }
 
     private class TimerTaskDrawCanvas extends TimerTask {
-        private final String LOG_TAG = TimerTaskDrawCanvas.class.getSimpleName();
         private final SurfaceHolder surfaceHolder;
-
-        private Field field;
 
         private int step;
         private int startX;
@@ -73,7 +62,7 @@ public class TimerDrawCanvasOnDisplay {
             showLog("TimerTaskCounterIncrements");
             this.surfaceHolder = surfaceHolder;
             initDisplayMetrics(context);
-            field = new Field(context);
+            Field.initField(context);
         }
 
         private void initDisplayMetrics(Context context) {
@@ -112,7 +101,7 @@ public class TimerDrawCanvasOnDisplay {
             }
             long t1 = System.nanoTime();
             long dt = (t1 - t0) / 1000000 + 1;
-            if (dt > 25) showLog("dt = " + dt);
+            if (dt > 29) showLog("dt = " + dt);
             if (dt > 32) showLogErr("Too long draw canvas !!!");
         }
 
@@ -152,10 +141,12 @@ public class TimerDrawCanvasOnDisplay {
         }
 
         private void showLog(String message) {
+            String LOG_TAG = TimerTaskDrawCanvas.class.getSimpleName() + "Log";
             Log.d(LOG_TAG, LOG_TAG + ": " + message);
         }
 
         private void showLogErr(String message) {
+            String LOG_TAG = TimerTaskDrawCanvas.class.getSimpleName() + "Log";
             Log.e(LOG_TAG, LOG_TAG + ": " + message);
         }
     }

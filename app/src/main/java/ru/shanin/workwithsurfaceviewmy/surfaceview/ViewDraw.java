@@ -1,5 +1,6 @@
 package ru.shanin.workwithsurfaceviewmy.surfaceview;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -49,6 +50,7 @@ public class ViewDraw extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouchEvent(MotionEvent event) {
         int eventAction = event.getAction();
         if (eventAction == MotionEvent.ACTION_DOWN) {

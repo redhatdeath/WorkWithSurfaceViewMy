@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.util.Log;
 
 import java.util.Arrays;
 
@@ -12,13 +11,11 @@ import ru.shanin.workwithsurfaceviewmy.R;
 import ru.shanin.workwithsurfaceviewmy.surfaceview.timers.TimerWorkWithCoordinate;
 
 public class Field {
-    private final String LOG_TAG = Field.class.getSimpleName();
-
     private static final int spriteCount = 8;
-    private final int countOfTypeBelt = 3;
-    private final int SPEED_FAST = 1;
-    private final int SPEED_NORMAL = 2;
-    private final int SPEED_SLOW = 3;
+    private static final int countOfTypeBelt = 3;
+    private static final int SPEED_FAST = 1;
+    private static final int SPEED_NORMAL = 2;
+    private static final int SPEED_SLOW = 3;
 
     private static Sprite[] line;
     private static Sprite[] trailer_b;
@@ -28,16 +25,12 @@ public class Field {
 
     private static Sprite[][] field;
 
-    public Field(Context context) {
+    public static void initField(Context context) {
         field = new Sprite[spriteCount][];
         for (int i = 0; i < field.length; i++) {
             field[i] = new Sprite[spriteCount];
             Arrays.fill(field[i], null);
         }
-        initSprite(context);
-    }
-
-    private void initSprite(Context context) {
         int[] speed = {SPEED_SLOW, SPEED_NORMAL, SPEED_FAST};
         int[] lineId = {R.drawable.mk0_line, R.drawable.mk1_line, R.drawable.mk2_line};
         int[] turn0123Id = {R.drawable.mk0_turn_0123, R.drawable.mk1_turn_0123, R.drawable.mk2_turn_0123};
@@ -81,10 +74,6 @@ public class Field {
 
     public static void updateSprite(int x, int y, int type) {
         field[x][y] = line[type];
-    }
-
-    private void showLog(String message) {
-        Log.d(LOG_TAG, LOG_TAG + ": " + message);
     }
 
     public static void clearSprite(int x, int y) {
