@@ -2,7 +2,6 @@ package ru.shanin.workwithsurfaceviewmy.surfaceview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;

@@ -50,7 +50,15 @@ public class Sprite {
     }
 
     public void draw(Canvas canvas, Rect rect, int ward) {
-        int currentFrame = (int) (stepCount / speed) % FRAMES_COUNT_COL;
+        int currentFrame = 0;
+        switch (speed) {
+            case 1:
+            case 3:
+                currentFrame = (int) (stepCount / speed) % FRAMES_COUNT_COL;
+                break;
+            case 2:
+                currentFrame = (int) ((stepCount << 1) / 3) % FRAMES_COUNT_COL;
+        }
         canvas.drawBitmap(bitmap, frames[ward][currentFrame], rect, new Paint());
     }
 
